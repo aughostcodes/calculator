@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'digital-ital';
+    src: url(./fonts/Digital7Italic-RBM3.ttf);
+}
+
 .calc-container {
     margin: 0 auto 0 auto;
     border: 1px solid black;
@@ -20,6 +25,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    font-family: 'digital-ital', Arial, Helvetica, sans-serif;
+    font-size: 6rem;
+    padding-right: 1rem;
 }
 
 .buttons {
@@ -27,12 +35,12 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
     height: 75%;
+    font-family: 'Oxanium', cursive;
 }
 
 .button {
     border: 1px solid yellow;
     display: flex;
-    text-align: center;
     justify-content: center;
     align-items: center;
 }
