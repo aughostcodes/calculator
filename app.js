@@ -1,7 +1,15 @@
 'use strict';
 
 const input = [];
+const buttons = document.querySelector('.buttons');
 
+buttons.addEventListener('click', function(event) {
+    if (event.target.textContent === '1') {
+        console.log('one');
+    } else if (event.target.textContent === '8') {
+        console.log('eight');
+    }
+})
 
 
 function add(num1, num2) {
@@ -48,4 +56,15 @@ function factorial(num) {
         }
         return result;
     }
+}
+
+function operate(num1, num2, operator) {
+    let total;
+    if (operator === '+') {
+        total = add(num1, num2);
+    }
+    if (operator === '-') {
+        total = subtract(num1, num2);
+    }
+    return total;
 }
