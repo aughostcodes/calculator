@@ -1,13 +1,16 @@
 'use strict';
 
 const input = [];
+const operator = [];
 const buttons = document.querySelector('.buttons');
 
-buttons.addEventListener('click', function(event) {
-    if (event.target.textContent === '1') {
-        console.log('one');
-    } else if (event.target.textContent === '8') {
-        console.log('eight');
+buttons.addEventListener('click', function (event) {
+    console.log(event.target.textContent);
+
+    if (event.target.classList.contains('operator')) {
+        operator.push(event.target.textContent);
+        console.log('an operator');
+        console.log(operator);
     }
 })
 
