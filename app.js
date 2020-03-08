@@ -1,11 +1,13 @@
 'use strict';
 
+const display = document.querySelector('.display');
 const buttons = document.querySelector('.buttons');
 
-let numericalInput1 = [];
-let numericalInput2 = [];
+let input = [];
 let num1;
-let operator = [];
+let num2;
+let sign;
+let expression = {};
 
 /*
     Take a numerical input by user clicking on numbers,
@@ -24,31 +26,53 @@ let operator = [];
 
 */
 
-buttons.addEventListener('click', function (event) {
-    console.log(event.target.textContent);
+buttons.addEventListener('click', makeExpression);
 
-    if (event.target.classList.contains('number')) {
-        numericalInput1.push(event.target.textContent);
-        console.log(numericalInput1);
+function makeExpression(event) {
+    let numericalInput1 = [...input];
+    let numericalInput2 = [...input];
+    let operator = [...input];
+
+    if (event.target.classList.contains('number') || event.target.classList.contains('operator')) {
+        input.push(event.target.textContent);
+    } else if (event.target.classList.contains('equals')) {
+        for (let i = 0; i < input.length; i++) {
+            if (input[i] === '/' ||
+                input[i] === 'X' ||
+                input[i] === '-' ||
+                input[i] === '+'
+            ) {
+                numericalInput1 = numericalInput1.splice(0, i);
+                numericalInput2 = numericalInput2.splice(i + 1);
+                sign = String(operator.splice(i, 1));
+                num1 = Number(numericalInput1.join(''));
+                num2 = Number(numericalInput2.join(''));
+                console.log(num1);
+                console.log(num2);
+                console.log(sign);
+
+
+                // console.log(add(num1, num2))
+            }
+        }
     }
-
-    if (event.target.classList.contains('operator')) {
-        operator.push(event.target.textContent);
-        numericalInput1 = Number(numericalInput1.join(''));
-        num1 = numericalInput1;
-        console.log(numericalInput1);
-        console.log(num1);
-        console.log(operator);
+    return expression = {
+        num1,
+        num2,
+        sign
     }
+    // console.log(expression)
+    // console.log(add(num1, num2))
+    // return expression;
+}
 
- // switch statement for math functions (add, sub, etc);
-})
 
 // Mathematical functions
 
-function add(num1, num2) {
-    return num1 + num2;
+function add() {
+    return expression.num1 + expression.num2;
 }
+
 
 function subtract(num1, num2) {
     return num1 - num2;
@@ -102,3 +126,13 @@ function operate(num1, num2, operator) {
     }
     return total;
 }
+
+// switch statement for math functions (add, sub, etc);
+//    switch (sign) {
+//     case '+':
+//         add(num1, num2);
+//         break;
+//     case '-':
+//         subtract(num1, num2);
+//         break;
+// }
