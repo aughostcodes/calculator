@@ -2,11 +2,13 @@
 
 const display = document.querySelector('.display');
 const buttons = document.querySelector('.buttons');
+const equalsButton = document.querySelector('.equals');
 
 let input = [];
 let num1;
 let num2;
 let sign;
+let result;
 let expression = {};
 
 /*
@@ -26,7 +28,7 @@ let expression = {};
 
 */
 
-buttons.addEventListener('click', makeExpression);
+
 
 function makeExpression(event) {
     let numericalInput1 = [...input];
@@ -44,15 +46,12 @@ function makeExpression(event) {
             ) {
                 numericalInput1 = numericalInput1.splice(0, i);
                 numericalInput2 = numericalInput2.splice(i + 1);
-                sign = String(operator.splice(i, 1));
                 num1 = Number(numericalInput1.join(''));
                 num2 = Number(numericalInput2.join(''));
+                sign = String(operator.splice(i, 1));
                 console.log(num1);
                 console.log(num2);
                 console.log(sign);
-
-
-                // console.log(add(num1, num2))
             }
         }
     }
@@ -61,9 +60,20 @@ function makeExpression(event) {
         num2,
         sign
     }
-    // console.log(expression)
-    // console.log(add(num1, num2))
-    // return expression;
+}
+
+function doMath() {
+    if (expression.sign === '+') {
+        result = add();
+    } else if (expression.sign === '-') {
+        result = subtract();
+    } else if (expression.sign === 'X') {
+        result = multiply();
+    } else if (expression.sign === '/') {
+        result = divide();
+    }
+    // console.log(result);
+    return result;
 }
 
 
@@ -73,9 +83,16 @@ function add() {
     return expression.num1 + expression.num2;
 }
 
+function subtract() {
+    return expression.num1 - expression.num2;
+}
 
-function subtract(num1, num2) {
-    return num1 - num2;
+function multiply() {
+    return expression.num1 * expression.num2;
+}
+
+function divide() {
+    return expression.num1 / expression.num2;
 }
 
 function sum(args) {
@@ -89,7 +106,7 @@ function sum(args) {
     }
 }
 
-function multiply(args) {
+function chainMultiply(args) {
     let result = args.reduce((acc, val) => {
         return acc * val;
     })
@@ -136,3 +153,6 @@ function operate(num1, num2, operator) {
 //         subtract(num1, num2);
 //         break;
 // }
+
+buttons.addEventListener('click', makeExpression);
+equalsButton.addEventListener('click', doMath);
