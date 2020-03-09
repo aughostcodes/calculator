@@ -8,7 +8,6 @@ let input = [];
 let num1;
 let num2;
 let sign;
-let result;
 let expression = {};
 
 /*
@@ -50,8 +49,8 @@ function makeExpression(event) {
                 num2 = Number(numericalInput2.join(''));
                 sign = String(operator.splice(i, 1));
                 console.log(num1);
-                console.log(num2);
                 console.log(sign);
+                console.log(num2);
             }
         }
     }
@@ -62,25 +61,16 @@ function makeExpression(event) {
     }
 }
 
-function doMath() {
-    if (expression.sign === '+') {
-        result = add();
-    } else if (expression.sign === '-') {
-        result = subtract();
-    } else if (expression.sign === 'X') {
-        result = multiply();
-    } else if (expression.sign === '/') {
-        result = divide();
-    }
-    // console.log(result);
-    return result;
+function performOperation() {
+    console.log(expression);
 }
 
+// performOperation();
 
 // Mathematical functions
 
 function add() {
-    return expression.num1 + expression.num2;
+    return Number(expression.num1) + Number(expression.num2);
 }
 
 function subtract() {
@@ -133,26 +123,5 @@ function factorial(num) {
     }
 }
 
-function operate(num1, num2, operator) {
-    let total;
-    if (operator === '+') {
-        total = add(num1, num2);
-    }
-    if (operator === '-') {
-        total = subtract(num1, num2);
-    }
-    return total;
-}
-
-// switch statement for math functions (add, sub, etc);
-//    switch (sign) {
-//     case '+':
-//         add(num1, num2);
-//         break;
-//     case '-':
-//         subtract(num1, num2);
-//         break;
-// }
-
 buttons.addEventListener('click', makeExpression);
-equalsButton.addEventListener('click', doMath);
+equalsButton.addEventListener('click', performOperation);
